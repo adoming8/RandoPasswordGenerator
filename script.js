@@ -1,22 +1,12 @@
+// Password Generator 
+var red = alert (" To Generate Password --> 1st: input the desired length of the password!")
+var red = alert ("Mark/check the box of the special characters that you will like to include on your password.")
+var green = alert ("Finally, click on the Generate button to see your password")
 
-var lowerchar = function getRandomLower() {
-    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-
-}
-// console.log(char()); //testing to see if fucntion 
-
-var upperchar = function getRandomUpper() {
-	return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-}
-
-var randomnum = function getRandomNumber() {
-	return +String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-}
-
-var randomsym = function getRandomSymbol() {
-	const symbols = '!@#$%^&*(){}[]=<>/,.'
-	return symbols[Math.floor(Math.random() * symbols.length)];
-}
+var uppercase ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowercase = uppercase.toLocaleLowerCase();
+var numbers = "0123456789";
+var symbols ="!@#$%^&*()_+{}|:?/";
 
 var pass_length = document.getElementById("pass_length");
 var lowerchecker = document.getElementById("lowercase");
@@ -26,19 +16,35 @@ var symchecker = document.getElementById("symbols");
 //buttons
 var generatebtn = document.getElementById("generate_btn");
 var cclipboardbtn = document.getElementById("cclipboard_btn");
+// password display
 var urpassword = document.getElementById("ur_password");
 
 
-//create and even for btn click
-generatebtn.addEventListener("click" , function(e) {
-    var characters = randomnum(); 
-    (lowerchecker.checked) ? characters += upperchar : " ";
-    (upperchecker.checked) ? characters += numchecker : " ";
-    (numchecker.checked) ? characters += symchecker : " ";
-    (symchecker.checked) ? characters += upperchar : " ";
-
+//Creating and evenlistener for click to produce selected characters, #s, and symbols
+generatebtn.addEventListener("click" , function(event) {
+    var characters = " "; 
+     if (lowerchecker.checked) {
+        characters += lowercase;} 
+        else { 
+        " ";
+        }
+    if (upperchecker.checked) {
+        characters += uppercase;} 
+        else { 
+        " ";
+        }
+    if (numchecker.checked) {
+        characters += numbers;} 
+        else { 
+        " ";
+        }     
+    if (symchecker.checked) {
+        characters += symbols;} 
+        else { 
+        " ";
+    }
+    // including the password on the display password field
     urpassword.value = password(pass_length.value, characters);
-
 });
 
 
@@ -47,8 +53,8 @@ function password(l,characters) {
     var pwd = " ";
 
     for (var i = 0 ; i < l; i++){
-        pwd += lowerchar();
+        pwd += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return pwd;
 }
-// console.log(password(21,lowerchar()))
+// console.log(password(21, uppercase));
