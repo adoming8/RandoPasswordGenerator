@@ -1,39 +1,54 @@
 
-// function that generates random password
-function generate() {
-    //set password length/complexity
-    
-    var length = document.getElementById("slider").value;
-        // console.log(typeof complexity)
+var lowerchar = function getRandomLower() {
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 
-    // all possible values for password's characters
-    var password_values = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+";
-    
-    // variable that gets set when the user hits the generate button - what I'm printing out 
-    var password = " ";
+}
+// console.log(char()); //testing to see if fucntion 
 
-    // create for loop for password character generation
-    for (var i = 0; i <= length; i++) {
-        password = password + password_values.charAt(Math.floor(Math.random() * Math.floor(password_values.length - 1)));
-    } 
-
-    //add password to textbox/display area
-    document.getElementById("display").value = password;
-
-    // add previous passwords to hist. secetion
-    document.getElementById("lastpasswords").innerHTML += password + "<br />";
+var upperchar = function getRandomUpper() {
+	return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
 }
 
-// set defaul length of
-    document.getElementById("length").innerHTML = "Length: 70";
+var randomnum = function getRandomNumber() {
+	return +String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+}
 
-// function to pouplate the lethn of password by on slider position   
-    document.getElementById("slider").oninput = function (){
+var randomsym = function getRandomSymbol() {
+	const symbols = '!@#$%^&*(){}[]=<>/,.'
+	return symbols[Math.floor(Math.random() * symbols.length)];
+}
 
-    if(document.getElementById("slider").value > 0){
-        document.getElementById("length").innerHTML = "Length: " + document.getElementById("slider").value;
-        }
-    else{
-        document.getElementById("length").innerHTML = "Length: 8";
-        }
+var pass_length = document.getElementById("pass_length");
+var lowerchecker = document.getElementById("lowercase");
+var upperchecker = document.getElementById("uppercase");
+var numchecker = document.getElementById("numbers");
+var symchecker = document.getElementById("symbols");
+//buttons
+var generatebtn = document.getElementById("generate_btn");
+var cclipboardbtn = document.getElementById("cclipboard_btn");
+var urpassword = document.getElementById("ur_password");
+
+
+//create and even for btn click
+generatebtn.addEventListener("click" , function(e) {
+    var characters = randomnum(); 
+    (lowerchecker.checked) ? characters += upperchar : " ";
+    (upperchecker.checked) ? characters += numchecker : " ";
+    (numchecker.checked) ? characters += symchecker : " ";
+    (symchecker.checked) ? characters += upperchar : " ";
+
+    urpassword.value = password(pass_length.value, characters);
+
+});
+
+
+// function to create password l=length
+function password(l,characters) {
+    var pwd = " ";
+
+    for (var i = 0 ; i < l; i++){
+        pwd += lowerchar();
     }
+    return pwd;
+}
+// console.log(password(21,lowerchar()))

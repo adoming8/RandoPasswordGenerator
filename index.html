@@ -18,19 +18,32 @@
                     <h6>Generate a Password</h6>
                     <br />
                     <hr />
-                    <input type="text" id="display" placeholder="Your Secure Password">
-                    <br />
-                    <input type="range" min="7" max="149" name="slider" id="slider">
-                    <br />
-                    <button id="generate_btn" onclick="generate()">Generate</button>
+                    <input type="text" id="ur_password" placeholder="Your Secure Password">
+                    <button id="generate_btn" >Generate</button>
                     <button id="cclipboard_btn" onclick=" ">Copy to Clipboard</button>
-                    <div id = "length"> </div>
+                    <div id="settings">
+                        <p> Desired length?
+                            <input type="number" id = "pass_length" value="12" min="8" max="150" />
+                        </p>
+                        <p> lowercase Letters?
+                            <input type="checkbox" id="lowercase" />    <br />   
+                        </p>    
+                        <p> Uppercase Letters?
+                                <input type="checkbox" id="uppercase" />    <br />   
+                        </p>          
+                        <p> numbers?
+                                <input type="checkbox" id="numbers" />    <br />   
+                        </p> 
+                        <p> symbols?
+                                <input type="checkbox" id="symbols" />    <br />   
+                        </p> 
+                    </div>
                 </div>
-                <div class="previous_passwords">
+                <!-- <div class="previous_passwords">
                     <b>Previously Generated Passwords</b>
                     <br />
                     <div id="lastpasswords"></div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
